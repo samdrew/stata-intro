@@ -178,7 +178,7 @@ Similarly if we don't care about the turning circle in any of our calculations w
 
 --- 
 
-`replace` allows values to be set for pre-existing variables. Be wary when using this as it will change the original variables irrevocably.
+`replace` allows values to be set for pre-existing variables. Be wary when using this as it will change the original variables irrevocably. Because of this risk it outputs changes that have been made, so that they are not missed.
 
 ```
 replace [variable] = [value] *in [index]* *if [condition]*
@@ -331,29 +331,63 @@ or to look at various properties of the prices
 
 ## Interactive Env
 
-`browse` 
+`browse` opens a spreadsheet-like table of all or the selected variables in the Stata Graphical User Interface, according to any filters which may have been imposed.
 
-## Maths
+```
+browse *[variables...]* *if [condition]* *, nolabel*
+```
 
-`+` `-` `/` `*` `^` Operators
+* `variables` (**Optional**) space delimited list of which variables to display (all variables displayed by default)
+* `condition` (**Optional**) filter condition for which values to display
+* `nolabel` (**Optional**) displays values without their label being used (e.g. display foreign as 0 or 1 instead of domestic or foreign)
 
-`log` `ln`
+e.g. to browse the name and mpg of properties for cars worth more than 10,000
 
-`exp`
+```
+. browse make mpg if price > 10000
+```
 
-`sqrt`
+![browse make mpg if price > 10000](BrowseConditional.png)
 
-`sum`
+---
 
-`min` `max`
-
-`floor` `ceiling` `round`
-
-`int`
+`edit` is like browse, however the table cells are editable. This is not a recommended way of making edits to your data, however any changes made here will show in the console as their equivlent commands.
 
 ### Graph
 
-`histogram`
+Graphing functions all have lots of options, however the examples given here are will provide a very brief examples for each case. See the stata docs for details on things like labeling, colouring or otherwise customizing graph functionality.
+
+`histogram` draws a histogram to display the density or percentage change for a given value or range. *Note the comma in the following*
+
+```
+histogram [variable] *if [condition]*, *start([start])* *width([width])* *bin([no_of_bins])* *nodraw saving([filename])*
+```
+
+* `variable` is the variable data to use for the histogram
+* `condition` (**Optional**) is the filter condition for the data
+* `start` (**Optional**) The minimum value to display on the graph
+* `width` (**Optional**) the value range for the bins (i.e. largest value - smallest value in each bin) 
+* `no_of_bins` (**Optional**) the number of bins to display on the histogram
+* `filename` (**Optional**) the filename to save the graph under. Useful for when using .do files.
+
+e.g. to do a default histogram of weight
+
+```
+. histogram weight
+```
+
+![histogram weight](HistogramWeight.png)
+
+to display the mpg values for domestic cars with bars each covering a range of 5
+
+```
+. histogram mpg if foreign == 0, width(5) start(10)
+(bin=5, start=10, width=5)
+```
+
+![histogram mpg if foreign == 0, width(5) start(10)](HistogramMPG.png)
+
+---
 
 `kstat`
 
@@ -381,11 +415,33 @@ or to look at various properties of the prices
 
 ## Useful features
 
+## Maths Macros
+
+`+` `-` `/` `*` `^` Operators
+
+`log` `ln`
+
+`exp`
+
+`sqrt`
+
+`sum`
+
+`min` `max`
+
+`floor` `ceiling` `round`
+
+`int`
+
 ### Factor Variables
 
 http://www.stata.com/help.cgi?fvvarlist
 
 ### Special Variables
+
+`egen`
+
+`local`
 
 `return` `r`
 
