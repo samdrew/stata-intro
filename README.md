@@ -389,17 +389,48 @@ to display the mpg values for domestic cars with bars each covering a range of 5
 
 ---
 
-`kstat`
+`scatter` creates a basic scatter plot of two datasets
 
-`plot`
+```
+scatter [variable1] [variable2] *[w=[weight_variable]]*
+```
 
-`scatter`
+* `variable1` is the y-axis variable
+* `variable2` is the x-axis variable
+* `weight_variable` variable to use in creating weighted points
+
+e.g. to create a simple scatter plot of price and weight
+
+```
+. scatter price weight
+```
+
+![ScatterPriceWeight](ScatterPriceWeight.png)
+
+To create a scatter plot of mpg and weight with markers weighted based on the price
+
+```
+. scatter mpg weight [w=price], msymbol(circle_hollow)
+(analytic weights assumed)
+(analytic weights assumed)
+(analytic weights assumed)
+```
+
+![scatter mpg weight [w=price], msymbol(circle_hollow)](WeightedScatter.png)
+
+---
+
+`twoway` is the generic form for a two way plot (e.g. scatter, line etc.) and provides the ability to plot multiple lines on the same axis.
+
+---
+
+`graph` As with table the `graph` functionality is the generic form for graphs and can be used to create any graph, and some graphing forms require this. See [Stata Documentation](http://www.stata.com/help.cgi?graph) for full details.
 
 ### Execute
 
 `regress` `reg`
 
-`streg`
+`predict`
 
 ### Test
 
@@ -408,6 +439,8 @@ to display the mpg values for domestic cars with bars each covering a range of 5
 `ttest`
 
 ### Survivor Model
+
+`streg`
 
 `stset`
 
@@ -457,6 +490,10 @@ http://www.stata.com/help.cgi?fvvarlist
 
 `while`
 
+`for`
+
 ### Labelling
 
 Labelling could have fallen under the main category, however it turns out that it is incredibly powerful within Stata. With support for [i18n](https://en.wikipedia.org/wiki/Internationalization_and_localization), labelling data sets, variables and data values, it cannot easily be covered in the same short-format as other commands. `label` applies and manages labels for datasets, variables, and data values.
+
+For a great guide to this see the [Princeton Stata Tutorial Section 2.3](http://data.princeton.edu/stata/DataManagement.html#s23)
