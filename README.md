@@ -283,7 +283,13 @@ e.g.
 
 ---
 
-`tabulate` `tab` can quickly collect variables, as well as providing pdf/cdf values for a given sample within the dataset.
+`tabulate` `tab` can quickly collect variables, as well as providing pdf/cdf values for a given sample within the dataset. Also possible to use for generating dummy variables from factor variables.
+
+```
+tabulate [variable] *, generate([newVarName])*
+```
+
+* `variable` is the 
 
 ---
 
@@ -440,9 +446,9 @@ To create a scatter plot of mpg and weight with markers weighted based on the pr
 
 ### Survivor Model
 
-`streg`
-
 `stset`
+
+`streg`
 
 `sts`
 
@@ -469,6 +475,8 @@ To create a scatter plot of mpg and weight with markers weighted based on the pr
 ### Factor Variables
 
 http://www.stata.com/help.cgi?fvvarlist
+
+`xi`
 
 ### Special Variables
 
